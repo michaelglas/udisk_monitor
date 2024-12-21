@@ -3,6 +3,7 @@
   #:use-module (guix git-download)   ;for ‘git-predicate’
   #:use-module (guix build-system pyproject)
   #:use-module (gnu packages glib)
+  #:use-module (gnu packages python-build)
   #:use-module (gnu packages freedesktop)
   #:use-module ((guix licenses) #:prefix license:)
   )
@@ -30,6 +31,11 @@
               (let ((prog (string-append #$output "/bin/udisk_monitor")))
                 (wrap-program prog
                   `("GI_TYPELIB_PATH" = (,(getenv "GI_TYPELIB_PATH"))))))))))
+    (native-inputs
+     (list
+      python-setuptools
+      python-wheel))
+
     (inputs
      (list
       python-pygobject
